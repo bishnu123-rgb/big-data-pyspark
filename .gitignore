@@ -1,0 +1,9 @@
+.vscode
+artifacts
+extracted_data
+parquet_output
+venv
+extract.log
+load.log
+transform.log
+
