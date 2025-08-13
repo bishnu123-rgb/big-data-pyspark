@@ -4,18 +4,17 @@ import time
 import psycopg2
 from pyspark.sql import SparkSession
 
-# Import custom logger and time formatter
-sys.path.append('/home/bishnu/ETL')  # ✅ Replace with your absolute ETL path
+
+sys.path.append('/home/bishnu/ETL')  
 from utility.utility import setup_logger, format_seconds
 
-logger = setup_logger("load.log")  # ✅ Add a name for the log file
+logger = setup_logger("load.log")  
 
-# Check for required arguments
 if len(sys.argv) < 7:
     logger.error("Usage: python execute.py <parquet_output_dir> <db_name> <db_user> <db_host> <db_port> <db_password>")
     sys.exit(1)
 
-# Parse arguments
+
 parquet_dir = sys.argv[1]
 DB_NAME = sys.argv[2]
 DB_USER = sys.argv[3]
@@ -23,7 +22,7 @@ DB_HOST = sys.argv[4]
 DB_PORT = sys.argv[5]
 DB_PASSWORD = sys.argv[6]
 
-# Function to create tables
+
 def create_tables(db_name, db_user, db_password, db_host, db_port):
     try:
         conn = psycopg2.connect(
@@ -114,7 +113,6 @@ def create_tables(db_name, db_user, db_password, db_host, db_port):
     except Exception as e:
         logger.error("❌ Error creating tables", exc_info=True)
 
-# Function to load data
 def load_parquet_to_postgres(parquet_path, db_name, db_user, db_password, db_host, db_port):
     try:
         spark = SparkSession.builder \
@@ -142,7 +140,7 @@ def load_parquet_to_postgres(parquet_path, db_name, db_user, db_password, db_hos
     except Exception as e:
         logger.error("❌ Error loading Parquet to PostgreSQL", exc_info=True)
 
-# Run main
+
 if __name__ == "__main__":
     start_time = time.time()
 
@@ -151,3 +149,4 @@ if __name__ == "__main__":
 
     end_time = time.time()
     logger.info(f"🕒 Execution time: {format_seconds(end_time - start_time)}")
+
