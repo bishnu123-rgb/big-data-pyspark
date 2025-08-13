@@ -33,7 +33,7 @@ def create_tables(db_name, db_user, db_password, db_host, db_port):
             port=db_port
         )
         cur = conn.cursor()
-        logger.info("✅ Connected to PostgreSQL.")
+        logger.info("Connected to PostgreSQL.")
 
         create_statements = [
             """
@@ -109,9 +109,9 @@ def create_tables(db_name, db_user, db_password, db_host, db_port):
         conn.commit()
         cur.close()
         conn.close()
-        logger.info("✅ All tables created successfully.")
+        logger.info("All tables created successfully.")
     except Exception as e:
-        logger.error("❌ Error creating tables", exc_info=True)
+        logger.error("Error creating tables", exc_info=True)
 
 def load_parquet_to_postgres(parquet_path, db_name, db_user, db_password, db_host, db_port):
     try:
@@ -123,7 +123,7 @@ def load_parquet_to_postgres(parquet_path, db_name, db_user, db_password, db_hos
         for folder in os.listdir(parquet_path):
             full_path = os.path.join(parquet_path, folder)
             if os.path.isdir(full_path):
-                logger.info(f"📦 Loading dataset: {folder}")
+                logger.info(f"Loading dataset: {folder}")
                 df = spark.read.parquet(full_path)
 
                 df.write \
@@ -136,9 +136,9 @@ def load_parquet_to_postgres(parquet_path, db_name, db_user, db_password, db_hos
                     .mode("overwrite") \
                     .save()
 
-                logger.info(f"✅ Loaded: {folder}")
+                logger.info(f"Loaded: {folder}")
     except Exception as e:
-        logger.error("❌ Error loading Parquet to PostgreSQL", exc_info=True)
+        logger.error("Error loading Parquet to PostgreSQL", exc_info=True)
 
 
 if __name__ == "__main__":
@@ -148,5 +148,6 @@ if __name__ == "__main__":
     load_parquet_to_postgres(parquet_dir, DB_NAME, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT)
 
     end_time = time.time()
-    logger.info(f"🕒 Execution time: {format_seconds(end_time - start_time)}")
+    logger.info(f"Execution time: {format_seconds(end_time - start_time)}")
+
 
