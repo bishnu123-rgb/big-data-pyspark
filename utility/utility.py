@@ -20,9 +20,10 @@ def setup_logger(log_file_name):
 
     return logger
 
-# ✅ Step 10: Add time formatting utility
+
 def format_seconds(seconds):
     hours = int(seconds // 3600)
     minutes = int((seconds % 3600) // 60)
     seconds = int(seconds % 60)
     return f"{hours}h:{minutes}m:{seconds}s"
+
