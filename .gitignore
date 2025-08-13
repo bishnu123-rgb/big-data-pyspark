@@ -7,3 +7,4 @@ extract.log
 load.log
 transform.log
 
+**/__pycache__/
