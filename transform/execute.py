@@ -74,9 +74,10 @@ if __name__ == "__main__":
         artists_df, tracks_df, rec_df = clean_and_write_parquet(spark, input_path, output_path)
         create_master_table(artists_df, tracks_df, rec_df, output_path)
         create_analytics_datasets(output_path, rec_df, tracks_df, artists_df)
-        logger.info("✅ Transform completed successfully.")
+        logger.info("Transform completed successfully.")
     except Exception as e:
-        logger.error("❌ Transform failed", exc_info=True)
+        logger.error("Transform failed", exc_info=True)
 
     end_time = time.time()
     logger.info(f"🕒 Execution time: {format_seconds(end_time - start_time)}")
+
