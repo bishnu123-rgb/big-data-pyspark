@@ -51,9 +51,10 @@ if __name__ == "__main__":
         zip_file = download_file(KAGGLE_URL, EXTRACT_PATH)
         extract_zip(zip_file, EXTRACT_PATH)
         fix_json_format(os.path.join(EXTRACT_PATH, "dict_artists.json"))
-        logger.info("✅ Extraction and JSON fix complete.")
+        logger.info("Extraction and JSON fix complete.")
     except Exception as e:
-        logger.error("❌ Extraction failed", exc_info=True)
+        logger.error("Extraction failed", exc_info=True)
 
     end_time = time.time()
-    logger.info(f"🕒 Execution time: {format_seconds(end_time - start_time)}")
+    logger.info(f"Execution time: {format_seconds(end_time - start_time)}")
+
